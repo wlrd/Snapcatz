@@ -1,32 +1,33 @@
-from bottle import get, post, request, run # or route
+from bottle import get, post, request, run
+from snapchat import Snapchat
+import getpass
 
-@get('/login') # or @route('/login')
+
+@get('/login')
 def login():
-    return '''
-        <form name="input" action="/login" method="post">
-		Username: 
+	return '''
+		<form name="input" action="/login" method="post">
+		Your Username: 
 		<input type="text" name="username">
 		Password:
 		<input type="password" name="password">
+		Recipient Username:
+		<input type="text" name="friend">
 		<input type="submit" value="Submit">
 		</form>
-    	'''
+		'''
 
-@post('/login') # or @route('/login', method='POST')
+@post('/login')
 def do_login():
-    username = request.forms.get('username')
-    password = request.forms.get('password')
-    if check_login(username, password):
-        return "<p>Your login information was correct.</p>"
-    else:
-        return "<p>Login failed.</p>"
+	name = request.forms.get('username')
+	password = request.forms.get('password')
+	friend = request.forms.get('friend')
+	pic = "tlo.jpg"
+	s = Snapchat()
+	s.login(name, password)
 
-def check_login(username, password):
-	if (username in users and password == users[username]):
-		return True
-	else:
-		return False
+	# Send a snapchat
+	media_id = s.upload(Snapchat.MEDIA_IMAGE, pic)
+	s.send(media_id, friend)
 
-users = {"tlomont":"asdf1234"}
-
-run(host='localhost', port= 8080, debug=True)
+run(host='localhost', port=8080, debug=True)
