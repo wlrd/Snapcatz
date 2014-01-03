@@ -7,9 +7,13 @@ from snapchat import Snapchat
 import getpass
 import urllib
 
+#TODO: change user agent string
+hdr = { 'User-Agent' : 'super happy flair bot by /u/spladug' }
+
+
 
 url = 'http://www.reddit.com/r/catpictures'
-conn = urllib2.urlopen(url)
+conn = urllib2.urlopen(urllib2.Request(url, headers=hdr))
 html = conn.read()
 soup = BeautifulSoup(html)
 a = []
@@ -18,25 +22,19 @@ for elem in soup.findAll('a', href=re.compile('\.imgur\.com/')):
 	#print a
 
 url = 'http://www.reddit.com/r/catpictures/?count=25&after=t3_1u5r74'
-conn = urllib2.urlopen(url)
+conn = urllib2.urlopen(urllib2.Request(url, headers=hdr))
 html = conn.read()
 soup = BeautifulSoup(html)
 #for elem in soup.findAll('a', href=re.compile('\.imgur\.com/')):
 	#print elem['href']
 
 url = 'http://www.reddit.com/r/catpictures/?count=75&after=t3_1u0dwn'
-conn = urllib2.urlopen(url)
+conn = urllib2.urlopen(urllib2.Request(url, headers=hdr))
 html = conn.read()
 soup = BeautifulSoup(html)
 #for elem in soup.findAll('a', href=re.compile('\.imgur\.com/')):
 	#print elem['href']
 
-
-from random import choice
-url_final = choice(a)
-while("domain" in url_final):
-	url_final = choice(a)
-print url_final
 
 @get('/login')
 def login():
@@ -48,14 +46,17 @@ def login():
 		<input type="password" name="password">
 		Recipient Username:
 		<input type="text" name="friend">
-		Url of Picture:
-		<input type="text" name="pic_url">
 		<input type="submit" value="Submit">
 		</form>
 		'''
 
 @post('/login')
 def do_login():
+	from random import choice
+	url_final = choice(a)
+	while("domain" in url_final):
+		url_final = choice(a)
+	print url_final
 	name = request.forms.get('username')
 	password = request.forms.get('password')
 	friend = request.forms.get('friend')
