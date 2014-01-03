@@ -71,4 +71,3 @@ def do_login():
 	s.send(media_id, friend)
 
 run(host='localhost', port=8080, debug=True)
-
