@@ -25,16 +25,17 @@ url = 'http://www.reddit.com/r/catpictures/?count=25&after=t3_1u5r74'
 conn = urllib2.urlopen(urllib2.Request(url, headers=hdr))
 html = conn.read()
 soup = BeautifulSoup(html)
-#for elem in soup.findAll('a', href=re.compile('\.imgur\.com/')):
+for elem in soup.findAll('a', href=re.compile('\.imgur\.com/')):
+	a.append(elem['href'])
 	#print elem['href']
 
 url = 'http://www.reddit.com/r/catpictures/?count=75&after=t3_1u0dwn'
 conn = urllib2.urlopen(urllib2.Request(url, headers=hdr))
 html = conn.read()
 soup = BeautifulSoup(html)
-#for elem in soup.findAll('a', href=re.compile('\.imgur\.com/')):
+for elem in soup.findAll('a', href=re.compile('\.imgur\.com/')):
+	a.append(elem['href'])
 	#print elem['href']
-
 
 @get('/login')
 def login():
