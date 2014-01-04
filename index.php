@@ -11,7 +11,7 @@ body{
 <?php exec("python cat.py" . " > /dev/null &") ?>
 <div style="margin:20px auto; text-align:center; width:400px; height: 260px; border:2px solid; border-radius:20px; background-color: lightgray">
 <h1> Snapcatz!</h1>
-<p><form name="input" action="runCat.php" method="post">
+<p><form name="input" action="http://localhost:8080/login" method="post">
 Your Username: 
 <input type="text" name="username" style="border: 2px solid rgb(139, 188, 190); border-radius:5px"></p>
 <p>
