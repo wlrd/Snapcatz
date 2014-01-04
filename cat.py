@@ -73,8 +73,6 @@ def login():
 def do_login():
 	from random import choice
 	url_final = choice(a)
-	while("domain" in url_final):
-		url_final = choice(a)
 	print url_final
 	name = request.forms.get('username')
 	password = request.forms.get('password')
