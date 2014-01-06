@@ -1,2 +1,2 @@
 #README
-Spinoff version working here - http://www.snapmecatz.com/
+Spin off version working here - http://www.snapmecatz.com/
